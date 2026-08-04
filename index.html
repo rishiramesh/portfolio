@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rishi Ramesh — Product & UX Design</title>
+<meta name="description" content="Rishi Ramesh — Senior Product & UX Designer, Bengaluru. End-to-end design across B2B SaaS.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
+<style>
+  :root{
+    --canvas:#EFECFC;
+    --paper:#FBFAFD;
+    --ink:#15171B;
+    --ink-soft:#444;
+    --select:#2F6FED;
+    --select-soft:#2F6FED14;
+    --measure:#FF2E93;
+    --measure-soft:#FF2E9312;
+    --hairline:#E4E5E9;
+    --dot:#00000010;
+    --avatar-a:#8B7FE8;
+    --avatar-b:#6E5FDB;
+    --c-blue:#2F6FED;
+    --c-pink:#FF2E93;
+    --c-teal:#14B8A6;
+    --c-amber:#F5A623;
+    --c-purple:#8B5CF6;
+    --maxw:840px;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+
+  body{
+    margin:0;
+    background-color:var(--canvas);
+    background-image:
+      radial-gradient(var(--dot) 1px, transparent 1px),
+      radial-gradient(ellipse 640px 420px at 10% 6%, #DCE6FF 0%, transparent 65%),
+      radial-gradient(ellipse 620px 420px at 90% 14%, #FBE1F1 0%, transparent 60%),
+      radial-gradient(ellipse 680px 460px at 50% 100%, #DFF3E6 0%, transparent 60%);
+    background-size:22px 22px, auto, auto, auto;
+    background-repeat:repeat, no-repeat, no-repeat, no-repeat;
+    background-attachment:fixed;
+    color:var(--ink);
+    font-family:'DM Sans', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  ::selection{ background:var(--select); color:#fff; }
+  a{ color:inherit; text-decoration:none; }
+  .mono{ font-family:'IBM Plex Mono', monospace; }
+  svg{ display:block; }
+
+  .page{ max-width:var(--maxw); margin:0 auto; padding:40px 20px 100px; }
+
+  .breadcrumb{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:var(--select);
+    margin-bottom:10px;
+  }
+
+  .frame{
+    position:relative;
+    background:
+      radial-gradient(140% 100% at 100% 0%, rgba(47,111,237,0.10) 0%, transparent 55%),
+      radial-gradient(120% 100% at 0% 100%, rgba(255,46,147,0.07) 0%, transparent 55%),
+      #FBFAFD;
+    border:1px solid var(--select);
+  }
+  .handle{ position:absolute; width:8px; height:8px; background:#fff; border:1.5px solid var(--select); z-index:3; }
+  .handle.tl{ top:-4px; left:-4px; }
+  .handle.tr{ top:-4px; right:-4px; }
+  .handle.bl{ bottom:-4px; left:-4px; }
+  .handle.br{ bottom:-4px; right:-4px; }
+
+  .toolbar{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:26px 40px; border-bottom:1px dashed var(--hairline);
+  }
+  .toolbar h1{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:28px; margin:0; }
+  .tool-icons{ display:flex; align-items:center; gap:10px; flex-shrink:0; transition:opacity .18s ease; }
+  .tool-icons.moving{ opacity:0; }
+  .tool-icons a, .tool-icons button{
+    width:32px; height:32px; display:flex; align-items:center; justify-content:center;
+    border:1px solid var(--hairline); border-radius:8px; color:var(--ink-soft);
+    background:none; cursor:pointer; transition:border-color .2s ease, color .2s ease;
+    position:relative;
+  }
+  .tool-icons a:hover, .tool-icons button:hover{ border-color:var(--select); color:var(--select); }
+  .tool-icons [data-tooltip]::after{
+    content:attr(data-tooltip);
+    position:absolute; top:calc(100% + 8px); left:50%; transform:translateX(-50%) translateY(-4px);
+    background:#15171E; color:#F1F2F5;
+    font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:.02em;
+    padding:4px 9px; border-radius:6px; white-space:nowrap;
+    opacity:0; pointer-events:none; z-index:50;
+    transition:opacity .15s ease, transform .15s ease;
+  }
+  .tool-icons [data-tooltip]:hover::after{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+  .section{ padding:24px 40px; }
+
+  .section-label{
+    display:flex; align-items:center; gap:8px;
+    font-family:'IBM Plex Mono', monospace; font-size:12px;
+    letter-spacing:.08em; text-transform:uppercase; color:var(--ink-soft);
+    margin-bottom:22px;
+  }
+  .section-label .dot{ width:7px; height:7px; border-radius:50%; background:var(--select); display:inline-block; }
+
+  .profile{ display:flex; gap:22px; align-items:center; margin-bottom:24px; }
+   .avatar{
+    width:84px;
+    height:84px;
+    padding:4px;                 /* border spacing */
+    border:1px solid var(--select);
+    border-radius:16px;
+    background:var(--paper);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+}
+
+.avatar img{
+    width:100%;
+    height:100%;
+    border-radius:12px;
+    object-fit:cover;
+    display:block;
+}
+  .profile h2{
+    font-family:'Source Serif 4', serif; font-weight:500;
+    font-size:clamp(34px, 5vw, 44px); margin:0; line-height:1.05;
+  }
+  .profile .role{ margin-top:6px; font-size:13px; letter-spacing:.03em; text-transform:uppercase; color:var(--ink-soft); }
+  .bio{ max-width:78ch; font-size:16px; color:var(--ink); }
+
+  .timeline{ position:relative; }
+  .timeline-item{ position:relative; display:flex; gap:20px; padding-bottom:34px; }
+  .timeline-item:last-child{ padding-bottom:0; }
+  .timeline-item::before{
+    content:''; position:absolute; left:20px; top:44px; bottom:0; width:1px; background:var(--hairline);
+  }
+  .timeline-item:last-child::before{ display:none; }
+
+  .icon-badge{
+    position:relative; width:40px; height:40px; border-radius:10px;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0; z-index:1;
+  }
+  .icon-badge svg{ width:18px; height:18px; }
+
+  .timeline-item .info h3{ font-size:16px; font-weight:700; margin:0; display:inline; }
+  .timeline-item .info .when{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--ink-soft); margin-left:10px; }
+  .timeline-item .info p{ margin:8px 0 0; font-size:14.5px; color:var(--ink-soft); max-width:74ch; }
+
+  .fw-pill{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--select); color:#fff;
+    font-family:'IBM Plex Mono', monospace; font-size:11.5px;
+    letter-spacing:.06em; text-transform:uppercase;
+    padding:8px 16px; border-radius:20px; margin-bottom:24px;
+  }
+  .fw-pill .dot{ width:6px; height:6px; border-radius:50%; background:#fff; }
+
+  .case-grid{
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0,1fr));
+    gap:24px;
+    align-items:stretch;
+}
+
+.case-grid > div{
+    display:flex;
+    flex-direction:column;
+}
+
+.case-card{
+    display:flex;
+    flex-direction:column;
+
+    flex:1;
+
+    background:var(--paper);
+    border:1px solid var(--select);
+    border-radius:14px;
+    padding:22px;
+
+    transition:box-shadow .2s ease, transform .2s ease;
+}
+
+  .case-num{
+    display:block;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--select);
+
+    margin:0;
+    padding:0 0 8px;
+    line-height:1;
+}
+  .case-card:hover{ box-shadow:0 10px 24px rgba(47,111,237,0.16); transform:translateY(-3px); }
+  .case-card .top{ display:flex; justify-content:space-between; align-items:flex-start; gap:10px; flex-wrap:wrap; }
+  .case-card .tag{ font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:.04em; text-transform:uppercase; color:var(--ink-soft); }
+  .award-tag{
+    display:inline-flex; align-items:center; gap:4px;
+    font-family:'IBM Plex Mono', monospace; font-size:10.5px; color:var(--measure);
+    background:var(--measure-soft); border:1px solid var(--measure); border-radius:20px;
+    padding:4px 10px; white-space:nowrap;
+  }
+  .case-card h3{ display:flex; align-items:center; gap:6px; font-size:18px; font-weight:700; margin:12px 0 0; }
+  .case-card h3 svg{ width:15px; height:15px; color:var(--ink-soft); }
+  .case-card p{ margin:10px 0 0; font-size:14.5px; color:var(--ink-soft); }
+
+  .portfolio-cta{
+    display:inline-flex; align-items:center; gap:8px; margin-top:16px;
+    font-family:'DM Sans', sans-serif; font-weight:600; font-size:14.5px;
+    background:var(--select); color:#fff; padding:13px 22px; border-radius:8px;
+    transition:background .2s ease;
+  }
+  .portfolio-cta:hover{ background:#2558c9; }
+
+  .contact-head{
+    display:flex; align-items:center; justify-content:space-between; gap:20px;
+    margin-bottom:22px;
+  }
+  .contact h2{
+    font-family:'Source Serif 4', serif; font-weight:500; font-size:28px;
+    white-space:nowrap; margin:0;
+  }
+  .contact-icons-slot{ display:flex; align-items:center; flex-shrink:0; }
+  .contact-icons-slot .tool-icons{ gap:10px; }
+  @media (max-width:768px){
+    .contact-head{ flex-wrap:wrap; }
+    .contact h2{ white-space:normal; font-size:22px; }
+  }
+
+  .fine{
+    border-top:1px solid var(--hairline); margin-top:36px; padding-top:20px;
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;
+    font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--ink-soft);
+  }
+  .fine a{ color:var(--ink-soft); text-decoration:none; transition:color .2s ease; }
+  .fine a:hover{ color:var(--select); }
+
+  .reveal{ opacity:0; transform:translateY(12px); transition:opacity .5s ease, transform .5s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity:1; transform:none; transition:none; }
+    html{ scroll-behavior:auto; }
+  }
+
+  @media (max-width:640px){
+    .toolbar{ padding:20px 22px; }
+    .section{ padding:36px 22px; }
+    .profile{ flex-direction:column; align-items:flex-start; }
+  }
+
+  .measure-badge{
+    position:fixed;
+    pointer-events:none;
+    z-index:9999;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10px;
+    letter-spacing:.02em;
+    color:var(--measure);
+    white-space:nowrap;
+    opacity:0;
+    transition:opacity .12s ease;
+  }
+  .measure-badge.on{ opacity:1; }
+
+  @media print{
+    body{ background:#fff; }
+    .breadcrumb, .handle, .tool-icons, .portfolio-cta{ display:none !important; }
+    .frame{ border:none; }
+    .case-card{ break-inside:avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="breadcrumb">Home/Portfolio</div>
+
+  <div class="frame measurable" id="frame">
+    <span class="handle tl"></span>
+    <span class="handle tr"></span>
+    <span class="handle bl"></span>
+    <span class="handle br"></span>
+
+    <header class="toolbar" id="toolbar">
+      <h1 id="toolbar-title">Welcome</h1>
+      <div class="tool-icons" id="tool-icons">
+        <a href="https://linkedin.com/in/rishi92" target="_blank" rel="noopener" aria-label="LinkedIn" data-tooltip="LinkedIn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="mailto:ram.3016@gmail.com" aria-label="Email" data-tooltip="Email">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
+        </a>
+        <a href="https://drive.google.com/uc?export=download&id=1_nSirceAkMFRZAf-AfFl1kMmN7A3QAtb" aria-label="Download Resume" data-tooltip="Download Resume">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </a>
+      </div>
+    </header>
+
+    <section class="section reveal">
+      <div class="profile">
+        <div class="avatar">
+         <img src="me.png" alt="Rishi Ramesh">
+        </div>
+        <div>
+          <h2>Rishi Ramesh</h2>
+          <div class="role">Product &amp; UX Design, Bengaluru, IN</div>
+        </div>
+      </div>
+      <p class="bio">
+        Product &amp; UX Designer with 10 years of experience designing end-to-end digital
+        products — from heuristic evaluation and user research to design systems and dev
+        handover. Currently consulting at R Systems, partnered with Brandfolder by Smartsheet.
+      </p>
+    </section>
+
+    <section class="section reveal">
+      <div class="section-label"><span class="dot"></span>Experience</div>
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="icon-badge" style="background:#2F6FED1a; color:var(--c-blue);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>
+          </div>
+          <div class="info">
+            <h3>R Systems</h3><span class="when mono">2023 — Present</span>
+            <p>Embedded as the sole designer at Smartsheet on the Brandfolder project, I owned the engagement end-to-end — from heuristic evaluation and user interviews through to design backlog management and dev handover.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="icon-badge" style="background:#FF2E931a; color:var(--c-pink);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+          </div>
+          <div class="info">
+            <h3>Shipsy</h3><span class="when mono">2021 — 2023</span>
+            <p>Led end-to-end design across complex logistics workflows — consolidated planning, execution monitoring, and rider-facing experiences — driving measurable impact across delivery success rates, operational costs, and onboarding speed.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="icon-badge" style="background:#14B8A61a; color:var(--c-teal);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6.5 4.5c-1.8 4-2 10 1 14 3.3 4.3 10 4.7 14-1"/><path d="M20.5 9c1 1.2 1.3 2.8.5 4.3"/></svg>
+          </div>
+          <div class="info">
+            <h3>The Bananan Design Company</h3><span class="when mono">2020 — 2021</span>
+            <p>Led end-to-end design across complex logistics workflows — consolidated planning, execution monitoring, and rider-facing experiences — driving measurable impact across delivery success rates, operational costs, and onboarding speed.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="icon-badge" style="background:#F5A6231a; color:var(--c-amber);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1.3.5 2.6 1.5 3.5.8.8 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
+          </div>
+          <div class="info">
+            <h3>Thought Matrix</h3><span class="when mono">2019 — 2020</span>
+            <p>Worked across the full product lifecycle as a generalist — designing a cross-platform dating app from zero to 200+ active users in four months, alongside brand identity and marketing collateral.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="icon-badge" style="background:#8B5CF61a; color:var(--c-purple);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
+          </div>
+          <div class="info">
+            <h3>Brandhype</h3><span class="when mono">2017 — 2019</span>
+            <p>Designed UI for client web projects and built brand identities and campaign collateral, using HTML and CSS to bridge the gap between design and development.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section reveal" id="featured-work">
+      <span class="fw-pill"><span class="dot"></span>Featured Work</span>
+
+      <div class="case-grid">
+        <div>
+          <span class="case-num">case/01</span>
+          <a class="case-card measurable" href="https://figmashort.link/6y5pTD" data-dim="1440×900">
+            <div class="top">
+              <span class="tag">Quick Commerce</span>
+              <span class="award-tag">★ Star Performer</span>
+            </div>
+            <h3>Courier Express Partner
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </h3>
+            <p>A user-friendly quick commerce and courier express platform that simplifies navigation, streamlines partner processes, and integrates visual cues for quick actions, enhancing operational efficiency and user satisfaction.</p>
+          </a>
+        </div>
+
+        <div>
+          <span class="case-num">case/02</span>
+          <a class="case-card measurable" href="https://figmashort.link/Hrbi3A" data-dim="1440×900">
+            <div class="top">
+              <span class="tag">Logistics Platform</span>
+              <span class="award-tag">★ Star Performer</span>
+            </div>
+            <h3>Platformisation
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </h3>
+            <p>A no-code, low-code platform that empowers Logistics Service Providers to configure workflows, validations, and financial logic independently, reducing engineering dependency and accelerating operations.</p>
+          </a>
+        </div>
+
+        <div>
+          <span class="case-num">case/03</span>
+          <a class="case-card measurable" href="https://figmashort.link/4AyCHz" data-dim="1440×900">
+            <div class="top">
+              <span class="tag">Rider Network</span>
+            </div>
+            <h3>Rider Referral: Rebuilding Trust
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </h3>
+            <p>A referral system for the rider network, designed to rebuild trust and drive verifiable engagement — from MVP through Phase 1.</p>
+          </a>
+        </div>
+
+        <div>
+          <span class="case-num">case/04</span>
+          <a class="case-card measurable" href="https://figmashort.link/rZhXM8" data-dim="1440×900">
+            <div class="top">
+              <span class="tag">Consumer Product</span>
+            </div>
+            <h3>Discern Living
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </h3>
+            <p>A home decor and interior platform with personalised recommendations, making professional interior design services more accessible.</p>
+          </a>
+        </div>
+      </div>
+
+      <a href="https://figmashort.link/yiBEpj"  class="portfolio-cta">View Full Portfolio →</a>
+    </section>
+
+    <section class="section contact reveal" id="contact">
+      <div class="section-label"><span class="dot"></span>Contact</div>
+      <div class="contact-head">
+        <h2>Open to hearing about the right opportunity.</h2>
+        <div class="contact-icons-slot" id="contact-icons-slot"></div>
+      </div>
+      <div class="fine">
+        <span>© Rishi Ramesh, 2026</span>
+        <a href="mailto:ram.3016@gmail.com">ram.3016@gmail.com</a>
+        <span>Built without a page builder.</span>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold:0.1 });
+  revealEls.forEach(el=>io.observe(el));
+
+  /* ---------- Move the icon row down next to the contact heading on scroll ---------- */
+  const toolIcons = document.getElementById('tool-icons');
+  const toolbar = document.getElementById('toolbar');
+  const contactSlot = document.getElementById('contact-icons-slot');
+  const contactSection = document.getElementById('contact');
+
+  if(toolIcons && toolbar && contactSlot && contactSection){
+    let inContact = false;
+
+    function relocate(toContact){
+      if(toContact === inContact) return;
+      inContact = toContact;
+      toolIcons.classList.add('moving');
+      setTimeout(()=>{
+        if(toContact){
+          contactSlot.appendChild(toolIcons);
+        } else {
+          toolbar.appendChild(toolIcons);
+        }
+        toolIcons.classList.remove('moving');
+      }, 180);
+    }
+
+    const contactObserver = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=> relocate(entry.isIntersecting));
+    }, { threshold:0.35 });
+    contactObserver.observe(contactSection);
+  }
+
+  /* ---------- Hover measurement: shows width near top/bottom, height near left/right ---------- */
+  const badge = document.createElement('div');
+  badge.className = 'measure-badge';
+  document.body.appendChild(badge);
+
+  let currentTarget = null;
+  let lastX = 0, lastY = 0;
+  let rafPending = false;
+
+  function dims(el){
+    if(el.dataset && el.dataset.dim){
+      const parts = el.dataset.dim.split('×').map(s=>s.trim());
+      return { w:parts[0], h:parts[1] };
+    }
+    const r = el.getBoundingClientRect();
+    return { w:String(Math.round(r.width)), h:String(Math.round(r.height)) };
+  }
+
+  function orientationFor(el, x, y){
+    const r = el.getBoundingClientRect();
+    const vMin = Math.min(Math.abs(y - r.top), Math.abs(r.bottom - y));
+    const hMin = Math.min(Math.abs(x - r.left), Math.abs(r.right - x));
+    return vMin <= hMin ? 'w' : 'h';
+  }
+
+  function updateBadge(el, x, y){
+    const d = dims(el);
+    const orientation = orientationFor(el, x, y);
+    badge.textContent = (orientation === 'w' ? d.w : d.h) + 'px';
+    badge.classList.add('on');
+
+    const bw = badge.offsetWidth;
+    const bh = badge.offsetHeight;
+    let bx = x + 14;
+    let by = y - bh - 10;
+    if(by < 4){ by = y + 16; }
+    if(bx + bw > window.innerWidth - 4){ bx = x - bw - 14; }
+    badge.style.left = bx + 'px';
+    badge.style.top = by + 'px';
+  }
+
+  function hideBadge(){
+    badge.classList.remove('on');
+    currentTarget = null;
+  }
+
+  document.addEventListener('mousemove', (e)=>{
+    lastX = e.clientX; lastY = e.clientY;
+    if(rafPending) return;
+    rafPending = true;
+    requestAnimationFrame(()=>{
+      rafPending = false;
+      const el = document.elementFromPoint(lastX, lastY);
+      const target = el ? el.closest('.measurable') : null;
+      if(target){
+        currentTarget = target;
+        updateBadge(target, lastX, lastY);
+      } else if(currentTarget){
+        hideBadge();
+      }
+    });
+  }, { passive:true });
+
+  document.addEventListener('mouseleave', hideBadge);
+  window.addEventListener('scroll', ()=>{ if(currentTarget) updateBadge(currentTarget, lastX, lastY); }, { passive:true });
+  window.addEventListener('resize', ()=>{ if(currentTarget) updateBadge(currentTarget, lastX, lastY); });
+</script>
+
+</body>
+</html>

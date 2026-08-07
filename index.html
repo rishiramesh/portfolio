@@ -84,10 +84,10 @@
 
   .toolbar{
     display:flex; justify-content:space-between; align-items:center;
-    border-bottom:1px dashed var(--hairline);
   }
   .toolbar h1{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:28px; margin:0; }
   .tool-icons{ display:flex; align-items:center; gap:10px; flex-shrink:0; transition:opacity .18s ease; }
+  .tool-icons.tool-icons-right{ margin-left:auto; }
   .tool-icons.moving{ opacity:0; }
   .tool-icons a, .tool-icons button{
     width:32px; height:32px; display:flex; align-items:center; justify-content:center;
@@ -306,28 +306,27 @@
     <span class="handle bl"></span>
     <span class="handle br"></span>
 
-    <header class="toolbar" id="toolbar">
-      <div class="tool-icons" id="tool-icons">
-        <a href="https://linkedin.com/in/rishi92" target="_blank" rel="noopener" aria-label="LinkedIn" data-tooltip="LinkedIn">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-        </a>
-        <a href="mailto:ram.3016@gmail.com" aria-label="Email" data-tooltip="Email">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
-        </a>
-        <a href="https://drive.google.com/uc?export=download&id=1_nSirceAkMFRZAf-AfFl1kMmN7A3QAtb" aria-label="Download Resume" data-tooltip="Download Resume">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        </a>
-      </div>
-    </header>
+    <header class="toolbar" id="toolbar"></header>
 
     <section class="section reveal">
-      <div class="profile">
+      <div class="profile" id="tool-icons-home">
         <div class="avatar">
          <img src="me.png" alt="Rishi Ramesh">
         </div>
         <div>
           <h2>Rishi Ramesh</h2>
           <div class="role">Product &amp; UX Design, Bengaluru, IN</div>
+        </div>
+        <div class="tool-icons tool-icons-right" id="tool-icons">
+          <a href="https://linkedin.com/in/rishi92" target="_blank" rel="noopener" aria-label="LinkedIn" data-tooltip="LinkedIn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="mailto:ram.3016@gmail.com" aria-label="Email" data-tooltip="Email">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
+          </a>
+          <a href="https://drive.google.com/uc?export=download&id=1_nSirceAkMFRZAf-AfFl1kMmN7A3QAtb" aria-label="Download Resume" data-tooltip="Download Resume">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          </a>
         </div>
       </div>
       <p class="bio">
@@ -483,11 +482,11 @@
 
   /* ---------- Move the icon row down next to the contact heading on scroll ---------- */
   const toolIcons = document.getElementById('tool-icons');
-  const toolbar = document.getElementById('toolbar');
+  const toolIconsHome = document.getElementById('tool-icons-home');
   const contactSlot = document.getElementById('contact-icons-slot');
   const contactSection = document.getElementById('contact');
 
-  if(toolIcons && toolbar && contactSlot && contactSection){
+  if(toolIcons && toolIconsHome && contactSlot && contactSection){
     let inContact = false;
 
     function relocate(toContact){
@@ -496,9 +495,11 @@
       toolIcons.classList.add('moving');
       setTimeout(()=>{
         if(toContact){
+          toolIcons.classList.remove('tool-icons-right');
           contactSlot.appendChild(toolIcons);
         } else {
-          toolbar.appendChild(toolIcons);
+          toolIcons.classList.add('tool-icons-right');
+          toolIconsHome.appendChild(toolIcons);
         }
         toolIcons.classList.remove('moving');
       }, 180);

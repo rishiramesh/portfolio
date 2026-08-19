@@ -3,581 +3,744 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rishi Ramesh — Product & UX Design</title>
-<meta name="description" content="Rishi Ramesh — Senior Product & UX Designer, Bengaluru. End-to-end design across B2B SaaS.">
-
+<title>Rishi Ramesh — Product & UX Designer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --canvas:#EFECFC;
-    --paper:#FBFAFD;
-    --ink:#15171B;
-    --ink-soft:#444;
-    --select:#2F6FED;
-    --select-soft:#2F6FED14;
-    --measure:#FF2E93;
-    --measure-soft:#FF2E9312;
-    --hairline:#E4E5E9;
-    --dot:#00000010;
-    --avatar-a:#8B7FE8;
-    --avatar-b:#6E5FDB;
-    --c-blue:#2F6FED;
-    --c-pink:#FF2E93;
-    --c-teal:#14B8A6;
-    --c-amber:#F5A623;
-    --c-purple:#8B5CF6;
-    --maxw:840px;
-  }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  *{ box-sizing:border-box; }
-  html{ scroll-behavior:smooth; }
+:root {
+  --bg:          #141414;
+  --surface:     #1E1E1E;
+  --border:      rgba(255,255,255,0.07);
+  --ink:         #111111;
+  --fg:          #FAFAF8;
+  --fg-mid:      rgba(255,255,255,0.45);
+  --fg-faint:    rgba(255,255,255,0.18);
 
-  body{
-    margin:0;
-    background-color:var(--canvas);
-    background-image:
-      radial-gradient(var(--dot) 1px, transparent 1px),
-      radial-gradient(ellipse 640px 420px at 10% 6%, #DCE6FF 0%, transparent 65%),
-      radial-gradient(ellipse 620px 420px at 90% 14%, #FBE1F1 0%, transparent 60%),
-      radial-gradient(ellipse 680px 460px at 50% 100%, #DFF3E6 0%, transparent 60%);
-    background-size:22px 22px, auto, auto, auto;
-    background-repeat:repeat, no-repeat, no-repeat, no-repeat;
-    background-attachment:fixed;
-    color:var(--ink);
-    font-family:'DM Sans', sans-serif;
-    font-size:16px;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-  }
+  /* Card backgrounds — warm cream base */
+  --about-bg:    #F7F2E8;
+  --exp-bg:      #F7F1EE;
+  --work-bg:     #F2F5E8;
+  --contact-bg:  #EEF3F7;
 
-  ::selection{ background:var(--select); color:#fff; }
-  a{ color:inherit; text-decoration:none; }
-  .mono{ font-family:'IBM Plex Mono', monospace; }
-  svg{ display:block; }
+  /* Accent per card */
+  --about-acc:   #F5A623;
+  --exp-acc:     #FF6B4A;
+  --work-acc:    #8FBF00;
+  --contact-acc: #4FC4F5;
 
-  .page{ max-width:var(--maxw); margin:0 auto; padding:40px 20px 100px; }
-
-  .breadcrumb{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:12.5px;
-    color:var(--select);
-    margin-bottom:10px;
-  }
-
-  .frame{
-    position:relative;
-    background:
-      radial-gradient(140% 100% at 100% 0%, rgba(47,111,237,0.10) 0%, transparent 55%),
-      radial-gradient(120% 100% at 0% 100%, rgba(255,46,147,0.07) 0%, transparent 55%),
-      #FBFAFD;
-    border:1px solid var(--select);
-  }
-  .handle{ position:absolute; width:8px; height:8px; background:#fff; border:1.5px solid var(--select); z-index:3; }
-  .handle.tl{ top:-4px; left:-4px; }
-  .handle.tr{ top:-4px; right:-4px; }
-  .handle.bl{ bottom:-4px; left:-4px; }
-  .handle.br{ bottom:-4px; right:-4px; }
-
-  .toolbar{
-    display:flex; justify-content:space-between; align-items:center;
-  }
-  .toolbar h1{ font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:28px; margin:0; }
-  .tool-icons{ display:flex; align-items:center; gap:10px; flex-shrink:0; transition:opacity .18s ease; }
-  .tool-icons.tool-icons-right{ margin-left:auto; }
-  .tool-icons.moving{ opacity:0; }
-  .tool-icons a, .tool-icons button{
-    width:32px; height:32px; display:flex; align-items:center; justify-content:center;
-    border:1px solid var(--hairline); border-radius:8px; color:var(--ink-soft);
-    background:none; cursor:pointer; transition:border-color .2s ease, color .2s ease;
-    position:relative;
-  }
-  .tool-icons a:hover, .tool-icons button:hover{ border-color:var(--select); color:var(--select); }
-  .tool-icons [data-tooltip]::after{
-    content:attr(data-tooltip);
-    position:absolute; top:calc(100% + 8px); left:50%; transform:translateX(-50%) translateY(-4px);
-    background:#15171E; color:#F1F2F5;
-    font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:.02em;
-    padding:4px 9px; border-radius:6px; white-space:nowrap;
-    opacity:0; pointer-events:none; z-index:50;
-    transition:opacity .15s ease, transform .15s ease;
-  }
-  .tool-icons [data-tooltip]:hover::after{ opacity:1; transform:translateX(-50%) translateY(0); }
-
-  .section{ padding:24px 48px; margin-bottom: 0px; }
-
-  .section-label{
-    display:flex; align-items:center; gap:8px;
-    font-family:'IBM Plex Mono', monospace; font-size:12px;
-    letter-spacing:.08em; text-transform:uppercase; color:var(--ink-soft);
-    margin-bottom:22px;
-  }
-
-  .footer-label{
-    display:flex; align-items:center;
-    font-family:'IBM Plex Mono', monospace; font-size:12px;
-    letter-spacing:.08em; text-transform:uppercase; color:var(--ink-soft);
-  }
-  
-  .section-label .dot{ width:7px; height:7px; border-radius:50%; background:var(--select); display:inline-block; }
-
-  .profile{ display:flex; gap:22px; align-items:center; margin-bottom:24px; }
-   .avatar{
-    width:84px;
-    height:84px;
-    padding:4px;                 /* border spacing */
-    border:1px solid var(--select);
-    border-radius:16px;
-    background:var(--paper);
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-shrink:0;
+  /* Edge colours */
+  --about-edge:  #E0D5BC;
+  --exp-edge:    #E0CFC8;
+  --work-edge:   #D0DCAA;
+  --contact-edge:#B8D8EC;
 }
 
-.avatar img{
-    width:100%;
-    height:100%;
-    border-radius:12px;
-    object-fit:cover;
-    display:block;
-}
-  .profile h2{
-    font-family:'Source Serif 4', serif; font-weight:500;
-    font-size:clamp(34px, 5vw, 44px); margin:0; line-height:1.05;
-  }
-  .profile .role{ margin-top:6px; font-size:13px; letter-spacing:.03em; text-transform:uppercase; color:var(--ink-soft); }
-  .bio{ max-width:78ch; font-size:16px; color:var(--ink); }
-
-  .timeline{ position:relative; }
-  .timeline-item{ position:relative; display:flex; gap:20px; padding-bottom:34px; }
-  .timeline-item:last-child{ padding-bottom:0; }
-  .timeline-item::before{
-    content:''; position:absolute; left:20px; top:44px; bottom:0; width:1px; background:var(--hairline);
-  }
-  .timeline-item:last-child::before{ display:none; }
-
-  .icon-badge{
-    position:relative; width:40px; height:40px; border-radius:10px;
-    display:flex; align-items:center; justify-content:center; flex-shrink:0; z-index:1;
-  }
-  .icon-badge svg{ width:18px; height:18px; }
-
-  .timeline-item .info h3{ font-size:16px; font-weight:700; margin:0; display:inline; }
-  .timeline-item .info .when{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--ink-soft); margin-left:10px; }
-  .timeline-item .info p{ margin:8px 0 0; font-size:14.5px; color:var(--ink-soft); max-width:74ch; }
-
-  .fw-pill{
-    display:inline-flex; align-items:center; gap:8px;
-    background:var(--select); color:#fff;
-    font-family:'IBM Plex Mono', monospace; font-size:11.5px;
-    letter-spacing:.06em; text-transform:uppercase;
-    padding:8px 16px; border-radius:20px; margin-bottom:24px;
-  }
-  .fw-pill .dot{ width:6px; height:6px; border-radius:50%; background:#fff; }
-
-  .case-grid{
-    display:grid;
-    grid-template-columns:repeat(2, minmax(0,1fr));
-    gap:24px;
-    align-items:stretch;
+html, body {
+  height: 100%;
+  background: var(--bg);
+  font-family: 'DM Sans', sans-serif;
+  color: var(--fg);
+  overflow: hidden;
+  transition: background 0.7s cubic-bezier(0.4,0,0.2,1);
 }
 
-.case-grid > div{
-    display:flex;
-    flex-direction:column;
+/* ── MENU ── */
+.menu-btn {
+  position: fixed;
+  top: 28px; right: 32px;
+  z-index: 300;
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 9px 18px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px; font-weight: 600;
+  color: var(--fg-mid);
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.menu-btn:hover { background: rgba(255,255,255,0.09); color: var(--fg); }
+
+.menu-icon { display: flex; flex-direction: column; gap: 4px; }
+.menu-icon span {
+  display: block; width: 14px; height: 1.5px;
+  background: currentColor; border-radius: 2px;
+  transition: all 0.22s;
+}
+.menu-open .menu-icon span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+.menu-open .menu-icon span:nth-child(2) { opacity: 0; }
+.menu-open .menu-icon span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+
+.menu-drawer {
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  width: 260px;
+  background: #1A1A1A;
+  border-left: 1px solid var(--border);
+  z-index: 200;
+  display: flex; flex-direction: column;
+  padding: 88px 36px 36px;
+  gap: 4px;
+  transform: translateX(100%);
+  transition: transform 0.32s cubic-bezier(0.4,0,0.2,1);
+}
+.menu-drawer.open { transform: translateX(0); }
+
+.menu-item {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 30px; font-weight: 700;
+  color: var(--fg-mid);
+  padding: 10px 0;
+  cursor: pointer;
+  border: none; background: none;
+  text-align: left;
+  transition: color 0.15s;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.menu-item:hover { color: var(--fg); }
+.menu-item.active { color: var(--fg); }
+
+.menu-divider { height: 1px; background: var(--border); margin: 12px 0; }
+
+.menu-contact {
+  margin-top: auto;
+  font-size: 12px; color: var(--fg-faint);
+  line-height: 1.8;
+}
+.menu-contact a { color: var(--fg-mid); text-decoration: none; transition: color 0.15s; }
+.menu-contact a:hover { color: var(--fg); }
+
+/* ── HERO ── */
+.hero {
+  height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
 }
 
-.case-card{
-    display:flex;
-    flex-direction:column;
-
-    flex:1;
-
-    background:var(--paper);
-    border:1px solid var(--select);
-    border-radius:14px;
-    padding:22px;
-
-    transition:box-shadow .2s ease, transform .2s ease;
+/* ── STAGE ── */
+.stage {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 48px;
 }
 
-  .case-num{
-    display:block;
-    font-family:'IBM Plex Mono', monospace;
-    font-size:12px;
-    color:var(--select);
-
-    margin:0;
-    padding:0 0 8px;
-    line-height:1;
+/* ── NAV LABELS ── */
+.nav-label {
+  display: flex; flex-direction: column; gap: 6px;
+  cursor: pointer; min-width: 110px;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.25s;
 }
-  .case-card:hover{ box-shadow:0 10px 24px rgba(47,111,237,0.16); transform:translateY(-3px); }
-  .case-card .top{ display:flex; justify-content:space-between; align-items:flex-start; gap:10px; flex-wrap:wrap; }
-  .case-card .tag{ font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:.04em; text-transform:uppercase; color:var(--ink-soft); }
-  .award-tag{
-    display:inline-flex; align-items:center; gap:4px;
-    font-family:'IBM Plex Mono', monospace; font-size:10.5px; color:var(--measure);
-    background:var(--measure-soft); border:1px solid var(--measure); border-radius:20px;
-    padding:4px 10px; white-space:nowrap;
-  }
-  .case-card h3{ display:flex; align-items:center; gap:6px; font-size:18px; font-weight:700; margin:12px 0 0; }
-  .case-card h3 svg{ width:15px; height:15px; color:var(--ink-soft); }
-  .case-card p{ margin:10px 0 0; font-size:14.5px; color:var(--ink-soft); }
+.nav-label.visible { opacity: 1; pointer-events: auto; }
+.nav-label.right { text-align: left; }
+.nav-label.left  { text-align: right; }
 
-  .portfolio-cta{
-    display:inline-flex; align-items:center; gap:8px; margin-top:16px;
-    font-family:'DM Sans', sans-serif; font-weight:600; font-size:14.5px;
-    background:var(--select); color:#fff; padding:13px 22px; border-radius:8px;
-    transition:background .2s ease;
-  }
-  .portfolio-cta:hover{ background:#2558c9; }
+.nav-dir {
+  font-size: 10px; letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-faint); font-weight: 600;
+  font-family: 'Space Grotesk', sans-serif;
+}
+.nav-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--fg);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  opacity: 0.3;
+  transition: opacity 0.2s;
+}
+.nav-label:hover .nav-title { opacity: 0.85; }
 
-  .contact-head{
-    display:flex; align-items:center; justify-content:space-between; gap:20px;
-    margin-bottom:22px;
-  }
-  .contact h2{
-    font-family:'Source Serif 4', serif; font-weight:500; font-size:28px;
-    white-space:nowrap; margin:0;
-  }
-  .contact-icons-slot{ display:flex; align-items:center; flex-shrink:0; }
-  .contact-icons-slot .tool-icons{ gap:10px; }
-  @media (max-width:768px){
-    .contact-head{ flex-wrap:wrap; }
-    .contact h2{ white-space:normal; font-size:22px; }
-  }
+/* ── STACK ── */
+.stack-wrap {
+  display: flex; flex-direction: column; align-items: center; gap: 28px;
+}
 
-  .fine{
-    border-top:1px solid var(--hairline); margin-top:36px; padding-top:20px;
-    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;
-    font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--ink-soft);
-  }
-  .fine a{ color:var(--ink-soft); text-decoration:none; transition:color .2s ease; }
-  .fine a:hover{ color:var(--select); }
+.stack {
+  position: relative;
+  width: 440px; height: 560px;
+}
 
-  .reveal{ opacity:0; transform:translateY(12px); transition:opacity .5s ease, transform .5s ease; }
-  .reveal.in{ opacity:1; transform:translateY(0); }
-  @media (prefers-reduced-motion: reduce){
-    .reveal{ opacity:1; transform:none; transition:none; }
-    html{ scroll-behavior:auto; }
-  }
+.peek {
+  position: absolute; inset: 0;
+  border-radius: 12px;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
 
-  @media (max-width:640px){
-    .toolbar{ padding:20px 22px; }
-    .section{ padding:36px 22px; }
-    .profile{ flex-direction:column; align-items:flex-start; }
-  }
+.peek-2 { transform: rotate(-4deg); z-index: 1; }
+.peek-3 { transform: rotate(5deg);  z-index: 0; }
 
-  .measure-badge{
-    position:fixed;
-    pointer-events:none;
-    z-index:9999;
-    font-family:'IBM Plex Mono', monospace;
-    font-size:10px;
-    letter-spacing:.02em;
-    color:var(--measure);
-    white-space:nowrap;
-    opacity:0;
-    transition:opacity .12s ease;
-  }
-  .measure-badge.on{ opacity:1; }
+.front-slot {
+  position: absolute; inset: 0;
+  z-index: 3;
+  border-radius: 12px;
+  transform-style: preserve-3d;
+}
 
-  @media print{
-    body{ background:#fff; }
-    .breadcrumb, .handle, .tool-icons, .portfolio-cta{ display:none !important; }
-    .frame{ border:none; }
-    .case-card{ break-inside:avoid; }
-  }
+/* ── CARD ── */
+.card {
+  width: 100%; height: 100%;
+  border-radius: 12px; padding: 40px;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Accent stripe top */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  border-radius: 0;
+}
+
+.card-about   { background: var(--about-bg);   border: 1px solid rgba(255,255,255,0.6); box-shadow: 2px 2px 0 0 var(--about-edge),   0 28px 56px rgba(0,0,0,0.4), 0 8px 20px rgba(0,0,0,0.25); }
+.card-exp     { background: var(--exp-bg);     border: 1px solid rgba(255,255,255,0.6); box-shadow: 2px 2px 0 0 var(--exp-edge),     0 28px 56px rgba(0,0,0,0.4), 0 8px 20px rgba(0,0,0,0.25); }
+.card-work    { background: var(--work-bg);    border: 1px solid rgba(255,255,255,0.6); box-shadow: 2px 2px 0 0 var(--work-edge),    0 28px 56px rgba(0,0,0,0.4), 0 8px 20px rgba(0,0,0,0.25); }
+.card-contact { background: var(--contact-bg); border: 1px solid rgba(255,255,255,0.6); box-shadow: 2px 2px 0 0 var(--contact-edge), 0 28px 56px rgba(0,0,0,0.4), 0 8px 20px rgba(0,0,0,0.25); }
+
+.card-about::before   { background: var(--about-acc); }
+.card-exp::before     { background: var(--exp-acc); }
+.card-work::before    { background: var(--work-acc); }
+.card-contact::before { background: var(--contact-acc); }
+
+/* ── CARD CONTENT ── */
+.card-eyebrow {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px; letter-spacing: 0.14em;
+  text-transform: uppercase; font-weight: 600;
+  color: #999; margin-bottom: 20px; flex-shrink: 0;
+}
+
+.about-header {
+  display: flex; align-items: center; gap: 16px; margin-bottom: 20px;
+}
+
+.avatar-wrap {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: rgba(0,0,0,0.06);
+  flex-shrink: 0; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+}
+
+.about-name-block { display: flex; flex-direction: column; gap: 3px; }
+
+.card-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 32px; font-weight: 700;
+  letter-spacing: -0.04em; line-height: 1;
+  color: #111;
+}
+
+.card-role {
+  font-size: 13px; color: #555;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.card-divider { height: 1px; background: rgba(0,0,0,0.08); margin: 18px 0; flex-shrink: 0; }
+
+.card-bio {
+  font-size: 15px; line-height: 1.65;
+  color: #444; font-family: 'DM Sans', sans-serif;
+}
+
+/* Accent dot before bio */
+.card-about   .card-bio::first-letter { color: var(--about-acc); font-weight: 700; font-size: 1.2em; }
+.card-exp     .card-bio::first-letter { color: var(--exp-acc); font-weight: 700; font-size: 1.2em; }
+
+/* Contact header */
+.contact-header {
+  display: flex; align-items: center; gap: 16px; margin-bottom: 20px;
+}
+.contact-icon-wrap {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: rgba(79,196,245,0.12);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; flex-shrink: 0;
+}
+.contact-text-block { display: flex; flex-direction: column; gap: 4px; }
+.lets-talk {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 32px; font-weight: 700;
+  letter-spacing: -0.04em; color: #111; line-height: 1;
+}
+.open-to { font-size: 12px; color: #555; font-family: 'DM Sans', sans-serif; }
+
+/* Sub-cards */
+.sub-cards { display: flex; flex-direction: column; gap: 8px; flex: 1; min-height: 0; }
+
+.sub-card {
+  border-radius: 8px; padding: 13px 15px;
+  display: flex; align-items: flex-start;
+  justify-content: space-between; gap: 10px;
+  text-decoration: none;
+  transition: transform 0.18s cubic-bezier(0.34,1.2,0.64,1),
+              box-shadow 0.18s;
+  flex: 1; cursor: pointer;
+  background: rgba(0,0,0,0.04);
+  border: 1px solid rgba(0,0,0,0.07);
+}
+.sub-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+}
+
+.sub-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 9px; letter-spacing: 0.12em;
+  text-transform: uppercase; font-weight: 600;
+  color: #888; margin-bottom: 4px;
+}
+.sub-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px; font-weight: 700;
+  color: #111; margin-bottom: 3px; line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+.sub-desc {
+  font-size: 12px; line-height: 1.5; color: #666;
+  font-family: 'DM Sans', sans-serif;
+}
+.sub-arrow { font-size: 13px; color: #999; flex-shrink: 0; margin-top: 2px; }
+
+/* Card accent label on sub-card */
+.card-about   .sub-card:hover { border-color: var(--about-acc); }
+.card-exp     .sub-card:hover { border-color: var(--exp-acc); }
+.card-work    .sub-card:hover { border-color: var(--work-acc); }
+.card-contact .sub-card:hover { border-color: var(--contact-acc); }
+
+/* Card footer */
+.card-footer {
+  margin-top: 16px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.tag {
+  font-size: 10px; padding: 4px 10px;
+  border-radius: 100px; font-weight: 500;
+  background: rgba(0,0,0,0.06); color: #555;
+  font-family: 'DM Sans', sans-serif;
+  letter-spacing: 0.02em;
+}
+
+/* Say hello */
+.say-hello {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px; font-weight: 700;
+  color: var(--fg-mid);
+  border: 1px solid var(--border);
+  padding: 11px 22px; border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.2s;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.say-hello:hover {
+  color: var(--fg);
+  border-color: rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.05);
+}
+
+/* ── FOOTER ── */
+footer {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 40px; z-index: 100;
+  border-top: 1px solid var(--border);
+}
+.footer-status {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: var(--fg-mid);
+  font-family: 'DM Sans', sans-serif;
+}
+.dot {
+  width: 6px; height: 6px; border-radius: 50%; background: #4ADE80;
+  animation: breathe 2.5s ease-in-out infinite;
+}
+@keyframes breathe { 0%,100%{opacity:1;}50%{opacity:0.35;} }
+
+.footer-links { display: flex; gap: 24px; list-style: none; }
+.footer-links a {
+  font-size: 12px; color: var(--fg-mid);
+  text-decoration: none; transition: color 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+.footer-links a:hover { color: var(--fg); }
+
+/* ── ANIMATIONS ── */
+@keyframes cardIn  { from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none} }
 </style>
 </head>
 <body>
 
-<div class="page">
-  <div class="breadcrumb">Home/Portfolio</div>
+<!-- MENU -->
+<button class="menu-btn" id="menu-btn">
+  <div class="menu-icon"><span></span><span></span><span></span></div>
+  Menu
+</button>
 
-  <div class="frame measurable" id="frame">
-    <span class="handle tl"></span>
-    <span class="handle tr"></span>
-    <span class="handle bl"></span>
-    <span class="handle br"></span>
+<div class="menu-drawer" id="menu-drawer">
+  <button class="menu-item active" data-idx="0">About</button>
+  <button class="menu-item" data-idx="1">Experience</button>
+  <button class="menu-item" data-idx="3">Work</button>
+  <button class="menu-item" data-idx="5">Contact</button>
+  <div class="menu-divider"></div>
+  <div class="menu-contact">
+    <a href="mailto:ram.3016@gmail.com">ram.3016@gmail.com</a><br>
+    <a href="https://figmashort.link/a6rKRT">figmashort.link/a6rKRT</a>
+  </div>
+</div>
 
-    <header class="toolbar" id="toolbar"></header>
+<!-- HERO -->
+<div class="hero">
+  <div class="stage">
 
-    <section class="section reveal">
-      <div class="profile" id="tool-icons-home">
-        <div class="avatar">
-         <img src="me.png" alt="Rishi Ramesh">
-        </div>
-        <div>
-          <h2>Rishi Ramesh</h2>
-          <div class="role">Product &amp; UX Design, Bengaluru, IN</div>
-        </div>
-        <div class="tool-icons tool-icons-right" id="tool-icons">
-          <a href="https://linkedin.com/in/rishi92" target="_blank" rel="noopener" aria-label="LinkedIn" data-tooltip="LinkedIn">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          </a>
-          <a href="mailto:ram.3016@gmail.com" aria-label="Email" data-tooltip="Email">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
-          </a>
-          <a href="https://drive.google.com/uc?export=download&id=1_nSirceAkMFRZAf-AfFl1kMmN7A3QAtb" aria-label="Download Resume" data-tooltip="Download Resume">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          </a>
-        </div>
-      </div>
-      <p class="bio">
-        Product &amp; UX Designer with 10 years of experience designing end-to-end digital
-        products — from heuristic evaluation and user research to design systems and dev
-        handover. Currently consulting at R Systems, partnered with Brandfolder by Smartsheet.
-      </p>
-    </section>
+    <div class="nav-label left" id="prev-label">
+      <span class="nav-dir">← back to</span>
+      <span class="nav-title" id="prev-title"></span>
+    </div>
 
-    <section class="section reveal">
-      <div class="section-label"><span class="dot"></span>Experience</div>
-      <div class="timeline">
-
-        <div class="timeline-item">
-          <div class="icon-badge" style="background:#2F6FED1a; color:var(--c-blue);">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>
-          </div>
-          <div class="info">
-            <h3>R Systems International Ltd.</h3><span class="when mono">2026 — Present</span>
-            <p>Embedded as the sole Product Designer at Smartsheet on the Brandfolder project, I owned the engagement end-to-end — heuristic evaluation, user interviews, design backlog, and dev handover. No safety net, no second designer. Just the work and the stakeholders.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="icon-badge" style="background:#FF2E931a; color:var(--c-pink);">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
-          </div>
-          <div class="info">
-            <h3>Shipsy</h3><span class="when mono">2018 — 2025</span>
-            <p>Led end-to-end design across planning, execution monitoring, and rider-facing experiences — the kind of complex, data-heavy workflows where a wrong design decision costs the business real money. The impact showed up in numbers: fewer ETA breaches, lower operational costs, faster onboarding.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="icon-badge" style="background:#14B8A61a; color:var(--c-teal);">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13c3.5-2 8-2 10 2a5.5 5.5 0 0 1 8 5"/><path d="M5.15 17.89c5.52-1.52 8.65-6.89 7-12C11.55 4 11.5 2 13 2c3.22 0 5 5.5 5 8 0 6.5-4.2 12-10.49 12C5.11 22 2 22 2 20c0-1.5 1.14-1.55 3.15-2.11Z"/></svg>
-          </div>
-          <div class="info">
-            <h3>The Banana Design Co.</h3><span class="when mono">2017 — 2018</span>
-            <p>Designed Discern Living — a hybrid home-interiors and e-commerce platform where users could style rooms and shop curated furniture. Led UX research and end-to-end design across web and mobile, alongside brand and interface work for clients like Tata Sky.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="icon-badge" style="background:#F5A6231a; color:var(--c-amber);">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1.3.5 2.6 1.5 3.5.8.8 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
-          </div>
-          <div class="info">
-            <h3>Thought Matrix eSolutions</h3><span class="when mono">2015 — 2017</span>
-            <p>Worked across the full product lifecycle as a generalist — designed a cross-platform dating app from zero to 200+ active users in four months, while also owning brand identity and marketing collateral.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="icon-badge" style="background:#8B5CF61a; color:var(--c-purple);">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
-          </div>
-          <div class="info">
-            <h3>Brandhype</h3><span class="when mono">2015</span>
-            <p>Designed UI for client web projects and built brand identities and campaign collateral — using HTML and CSS to stay close enough to development that handoffs actually worked.</p>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <section class="section reveal" id="featured-work">
-      <span class="fw-pill"><span class="dot"></span>Featured Work</span>
-
-      <div class="case-grid">
-        <div>
-          <span class="case-num">case/01</span>
-          <a class="case-card measurable" href="https://figmashort.link/6y5pTD" target="_blank" rel="noopener" data-dim="1440×900">
-            <div class="top">
-              <span class="tag">Quick Commerce</span>
-              <span class="award-tag"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg> Star Performer</span>
-            </div>
-            <h3>Courier Express Partner
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </h3>
-            <p>A user-friendly quick commerce and courier express platform that simplifies navigation, streamlines partner processes, and integrates visual cues for quick actions, enhancing operational efficiency and user satisfaction.</p>
-          </a>
-        </div>
-
-        <div>
-          <span class="case-num">case/02</span>
-          <a class="case-card measurable" href="https://figmashort.link/Hrbi3A" target="_blank" rel="noopener" data-dim="1440×900">
-            <div class="top">
-              <span class="tag">Logistics Platform</span>
-              <span class="award-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg> Star Performer</span>
-            </div>
-            <h3>Platformisation
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </h3>
-            <p>A no-code, low-code platform that empowers Logistics Service Providers to configure workflows, validations, and financial logic independently, reducing engineering dependency and accelerating operations.</p>
-          </a>
-        </div>
-
-        <div>
-          <span class="case-num">case/03</span>
-          <a class="case-card measurable" href="https://figmashort.link/4AyCHz" target="_blank" rel="noopener" data-dim="1440×900">
-            <div class="top">
-              <span class="tag">Rider Network</span>
-            </div>
-            <h3>Rider Referral: Rebuilding Trust
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </h3>
-            <p>A referral system for the rider network, designed to rebuild trust and drive verifiable engagement — from MVP through Phase 1.</p>
-          </a>
-        </div>
-
-        <div>
-          <span class="case-num">case/04</span>
-          <a class="case-card measurable" href="https://figmashort.link/rZhXM8" target="_blank" rel="noopener" data-dim="1440×900">
-            <div class="top">
-              <span class="tag">Consumer Product</span>
-            </div>
-            <h3>Discern Living
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </h3>
-            <p>A home decor and interior platform with personalised recommendations, making professional interior design services more accessible.</p>
-          </a>
+    <div class="stack-wrap">
+      <div class="stack" id="stack">
+        <div class="peek peek-3" id="peek3"></div>
+        <div class="peek peek-2" id="peek2"></div>
+        <div class="front-slot" id="front-slot">
+          <div class="card card-about" id="front-card"></div>
         </div>
       </div>
+      <a href="mailto:ram.3016@gmail.com" class="say-hello">Say hello ↗</a>
+    </div>
 
-      <a href="https://figmashort.link/yiBEpj" target="_blank" rel="noopener"  class="portfolio-cta">View Full Portfolio →</a>
-    </section>
-
-    <section class="section contact reveal" id="contact">
-      <div class="footer-label"><span class=""></span>If you've made it this far, </div>
-      <div class="contact-head">
-        <h2>I'd love to continue the conversation!</h2>
-        <div class="contact-icons-slot" id="contact-icons-slot"></div>
-      </div>
-      <div class="fine">
-        <span>© Rishi Ramesh, 2026</span>
-        <a href="mailto:ram.3016@gmail.com">ram.3016@gmail.com</a>
-        <span>Built without a page builder.</span>
-      </div>
-    </section>
+    <div class="nav-label right" id="next-label">
+      <span class="nav-dir">up next →</span>
+      <span class="nav-title" id="next-title"></span>
+    </div>
 
   </div>
 </div>
 
+<!-- FOOTER -->
+<footer>
+  <div class="footer-status">
+    <div class="dot"></div>
+    Open to new roles · Remote or hybrid · Bangalore
+  </div>
+  <ul class="footer-links">
+    <li><a href="https://figmashort.link/a6rKRT">Portfolio</a></li>
+    <li><a href="mailto:ram.3016@gmail.com">Email</a></li>
+    <li><a href="https://linkedin.com/in/rishi92">LinkedIn</a></li>
+  </ul>
+</footer>
+
 <script>
-  const revealEls = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
-    });
-  }, { threshold:0.1 });
-  revealEls.forEach(el=>io.observe(el));
+const sections = [
+  { id:'about',       label:'About',      cls:'card-about',   group:'about'      },
+  { id:'experience1', label:'Experience', cls:'card-exp',     group:'experience' },
+  { id:'experience2', label:'Experience', cls:'card-exp',     group:'experience' },
+  { id:'work1',       label:'Work',       cls:'card-work',    group:'work'       },
+  { id:'work2',       label:'Work',       cls:'card-work',    group:'work'       },
+  { id:'contact',     label:'Contact',    cls:'card-contact', group:'contact'    },
+];
 
-  /* ---------- Move the icon row down next to the contact heading on scroll ---------- */
-  const toolIcons = document.getElementById('tool-icons');
-  const toolIconsHome = document.getElementById('tool-icons-home');
-  const contactSlot = document.getElementById('contact-icons-slot');
-  const contactSection = document.getElementById('contact');
+const peekColors = {
+  about:'#F7F2E8', experience1:'#F7F1EE',
+  experience2:'#F7F1EE', work1:'#F2F5E8',
+  work2:'#F2F5E8', contact:'#EEF3F7'
+};
 
-  if(toolIcons && toolIconsHome && contactSlot && contactSection){
-    let inContact = false;
+function cardHTML(idx) {
+  const id = sections[idx].id;
 
-    function relocate(toContact){
-      if(toContact === inContact) return;
-      inContact = toContact;
-      toolIcons.classList.add('moving');
-      setTimeout(()=>{
-        if(toContact){
-          toolIcons.classList.remove('tool-icons-right');
-          contactSlot.appendChild(toolIcons);
-        } else {
-          toolIcons.classList.add('tool-icons-right');
-          toolIconsHome.appendChild(toolIcons);
-        }
-        toolIcons.classList.remove('moving');
-      }, 180);
-    }
+  if (id === 'about') return `
+    <div class="card-eyebrow">About</div>
+    <div class="about-header">
+      <div class="avatar-wrap">🤖</div>
+      <div class="about-name-block">
+        <div class="card-name">Rishi Ramesh</div>
+        <div class="card-role">Senior Product Designer · Bangalore</div>
+      </div>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-bio">I've spent 10 years making messy things simple — at the intersection of user needs, business goals, and engineering reality. Currently consulting at R Systems, embedded as the sole designer at Smartsheet on the Brandfolder project.</div>
+    <div class="card-footer">`;
 
-    const contactObserver = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=> relocate(entry.isIntersecting));
-    }, { threshold:0.35 });
-    contactObserver.observe(contactSection);
-  }
+  if (id === 'experience1') return `
+    <div class="card-eyebrow">Experience · 1 of 2</div>
+    <div class="card-name" style="margin-bottom:4px">Where I've worked</div>
+    <div class="card-role" style="margin-bottom:0">2017 — Present</div>
+    <div class="card-divider"></div>
+    <div class="sub-cards">
+      <div class="sub-card">
+        <div style="flex:1">
+          <div class="sub-label">2026 – Present · Remote</div>
+          <div class="sub-title">R Systems International</div>
+          <div class="sub-desc">Embedded as sole designer at Smartsheet on Brandfolder — heuristic evaluation, user interviews, design backlog, dev handover.</div>
+        </div><span class="sub-arrow">→</span>
+      </div>
+      <div class="sub-card">
+        <div style="flex:1">
+          <div class="sub-label">2018 – 2025 · Bangalore</div>
+          <div class="sub-title">Shipsy</div>
+          <div class="sub-desc">Seven years designing complex logistics workflows. Impact showed up in numbers: fewer ETA breaches, lower ops costs, faster onboarding.</div>
+        </div><span class="sub-arrow">→</span>
+      </div>
+      <div class="sub-card">
+        <div style="flex:1">
+          <div class="sub-label">2017 – 2018 · Gurugram</div>
+          <div class="sub-title">The Banana Design Co.</div>
+          <div class="sub-desc">Designed Discern Living — home-interiors and e-commerce platform across web and mobile.</div>
+        </div><span class="sub-arrow">→</span>
+      </div>
+    </div>`;
 
-  /* ---------- Hover measurement: shows width near top/bottom, height near left/right ---------- */
-  const badge = document.createElement('div');
-  badge.className = 'measure-badge';
-  document.body.appendChild(badge);
+  if (id === 'experience2') return `
+    <div class="card-eyebrow">Experience · 2 of 2</div>
+    <div class="card-name" style="margin-bottom:4px">Earlier work</div>
+    <div class="card-role" style="margin-bottom:0">2015 — 2017</div>
+    <div class="card-divider"></div>
+    <div class="sub-cards">
+      <div class="sub-card">
+        <div style="flex:1">
+          <div class="sub-label">2015 – 2017 · New Delhi</div>
+          <div class="sub-title">Thought Matrix eSolutions</div>
+          <div class="sub-desc">Designed a cross-platform dating app from zero to 200+ active users in four months, while owning brand identity and marketing collateral.</div>
+        </div><span class="sub-arrow">→</span>
+      </div>
+      <div class="sub-card">
+        <div style="flex:1">
+          <div class="sub-label">2015 · Gurugram</div>
+          <div class="sub-title">Brandhype</div>
+          <div class="sub-desc">UI for client web projects, brand identities, and campaign collateral — using HTML/CSS to bridge design and development.</div>
+        </div><span class="sub-arrow">→</span>
+      </div>
+    </div>`;
 
-  let currentTarget = null;
-  let lastX = 0, lastY = 0;
-  let rafPending = false;
+  if (id === 'work1') return `
+    <div class="card-eyebrow">Work · 1 of 2</div>
+    <div class="card-name" style="margin-bottom:4px">Case studies</div>
+    <div class="card-role" style="margin-bottom:0">Selected projects · 2018 – 2025</div>
+    <div class="card-divider"></div>
+    <div class="sub-cards">
+      <a href="https://figmashort.link/6y5pTD" target="_blank" class="sub-card" style="text-decoration:none">
+        <div style="flex:1">
+          <div class="sub-label">case/01 · Shipsy</div>
+          <div class="sub-title">Quick Commerce Courier Express</div>
+          <div class="sub-desc">Simplifying partner processes and operational efficiency for courier logistics.</div>
+        </div><span class="sub-arrow">↗</span>
+      </a>
+      <a href="https://figmashort.link/Hrbi3A" target="_blank" class="sub-card" style="text-decoration:none">
+        <div style="flex:1">
+          <div class="sub-label">case/02 · Shipsy</div>
+          <div class="sub-title">Logistics Platformisation</div>
+          <div class="sub-desc">No-code platform for LSPs to configure workflows and reduce engineering dependency.</div>
+        </div><span class="sub-arrow">↗</span>
+      </a>
+      <a href="https://figmashort.link/4AyCHz" target="_blank" class="sub-card" style="text-decoration:none">
+        <div style="flex:1">
+          <div class="sub-label">case/03 · Shipsy</div>
+          <div class="sub-title">Rider Referral: Rebuilding Trust</div>
+          <div class="sub-desc">Referral system driving verifiable engagement — from MVP through Phase 1.</div>
+        </div><span class="sub-arrow">↗</span>
+      </a>
+    </div>`;
 
-  function dims(el){
-    if(el.dataset && el.dataset.dim){
-      const parts = el.dataset.dim.split('×').map(s=>s.trim());
-      return { w:parts[0], h:parts[1] };
-    }
-    const r = el.getBoundingClientRect();
-    return { w:String(Math.round(r.width)), h:String(Math.round(r.height)) };
-  }
+  if (id === 'work2') return `
+    <div class="card-eyebrow">Work · 2 of 2</div>
+    <div class="card-name" style="margin-bottom:4px">More case studies</div>
+    <div class="card-role" style="margin-bottom:0">Selected projects · 2017 – 2018</div>
+    <div class="card-divider"></div>
+    <div class="sub-cards">
+      <a href="https://figmashort.link/rZhXM8" target="_blank" class="sub-card" style="text-decoration:none">
+        <div style="flex:1">
+          <div class="sub-label">case/04 · Banana Design Co.</div>
+          <div class="sub-title">Discern Living</div>
+          <div class="sub-desc">Home decor and interior platform with personalised recommendations, making professional design accessible.</div>
+        </div><span class="sub-arrow">↗</span>
+      </a>
+      <a href="https://figmashort.link/yiBEpj" target="_blank" class="sub-card" style="text-decoration:none">
+        <div style="flex:1">
+          <div class="sub-label">Full portfolio</div>
+          <div class="sub-title">View all work</div>
+          <div class="sub-desc">All case studies, research artifacts, and design work in one place.</div>
+        </div><span class="sub-arrow">↗</span>
+      </a>
+    </div>`;
 
-  function orientationFor(el, x, y){
-    const r = el.getBoundingClientRect();
-    const vMin = Math.min(Math.abs(y - r.top), Math.abs(r.bottom - y));
-    const hMin = Math.min(Math.abs(x - r.left), Math.abs(r.right - x));
-    return vMin <= hMin ? 'w' : 'h';
-  }
+  if (id === 'contact') return `
+    <div class="card-eyebrow">Contact</div>
+    <div class="contact-header">
+      <div class="contact-icon-wrap">✉️</div>
+      <div class="contact-text-block">
+        <div class="lets-talk">Let's talk</div>
+        <div class="open-to">Open to Senior / Lead Product Designer roles</div>
+      </div>
+    </div>
+    <div class="card-divider"></div>
+    <div class="sub-cards">
+      <a href="mailto:ram.3016@gmail.com" class="sub-card" style="text-decoration:none">
+        <div style="flex:1">
+          <div class="sub-label">Email</div>
+          <div class="sub-title">ram.3016@gmail.com</div>
+          <div class="sub-desc">Best way to reach me</div>
+        </div><span class="sub-arrow">↗</span>
+      </a>
+      <a href="https://linkedin.com/in/rishi92" target="_blank" class="sub-card" style="text-decoration:none">
+        <div style="flex:1">
+          <div class="sub-label">LinkedIn</div>
+          <div class="sub-title">linkedin.com/in/rishi92</div>
+          <div class="sub-desc">Connect professionally</div>
+        </div><span class="sub-arrow">↗</span>
+      </a>
+      <a href="https://figmashort.link/a6rKRT" target="_blank" class="sub-card" style="text-decoration:none">
+        <div style="flex:1">
+          <div class="sub-label">Portfolio</div>
+          <div class="sub-title">figmashort.link/a6rKRT</div>
+          <div class="sub-desc">Full portfolio and case studies</div>
+        </div><span class="sub-arrow">↗</span>
+      </a>
+    </div>`;
+}
 
-  function updateBadge(el, x, y){
-    const d = dims(el);
-    const orientation = orientationFor(el, x, y);
-    badge.textContent = (orientation === 'w' ? d.w : d.h) + 'px';
-    badge.classList.add('on');
+// ── STATE ──
+let current = 0, isAnimating = false;
+const frontSlot  = document.getElementById('front-slot');
+const frontCard  = document.getElementById('front-card');
+const peek2      = document.getElementById('peek2');
+const peek3      = document.getElementById('peek3');
+const prevLabel  = document.getElementById('prev-label');
+const nextLabel  = document.getElementById('next-label');
+const prevTitle  = document.getElementById('prev-title');
+const nextTitle  = document.getElementById('next-title');
+const menuBtn    = document.getElementById('menu-btn');
+const menuDrawer = document.getElementById('menu-drawer');
+const menuItems  = document.querySelectorAll('.menu-item');
 
-    const bw = badge.offsetWidth;
-    const bh = badge.offsetHeight;
-    let bx = x + 14;
-    let by = y - bh - 10;
-    if(by < 4){ by = y + 16; }
-    if(bx + bw > window.innerWidth - 4){ bx = x - bw - 14; }
-    badge.style.left = bx + 'px';
-    badge.style.top = by + 'px';
-  }
+function updatePeekColors() {
+  const n2 = (current + 1) % sections.length;
+  const n3 = (current + 2) % sections.length;
+  peek2.style.background = peekColors[sections[n2].id];
+  peek3.style.background = peekColors[sections[n3].id];
+}
 
-  function hideBadge(){
-    badge.classList.remove('on');
-    currentTarget = null;
-  }
+function updateLabels() {
+  const hasPrev = current > 0;
+  const hasNext = current < sections.length - 1;
+  prevLabel.classList.toggle('visible', hasPrev);
+  nextLabel.classList.toggle('visible', hasNext);
+  if (hasPrev) prevTitle.textContent = sections[current - 1].label;
+  if (hasNext) nextTitle.textContent = sections[current + 1].label;
+}
 
-  document.addEventListener('mousemove', (e)=>{
-    lastX = e.clientX; lastY = e.clientY;
-    if(rafPending) return;
-    rafPending = true;
-    requestAnimationFrame(()=>{
-      rafPending = false;
-      const el = document.elementFromPoint(lastX, lastY);
-      const target = el ? el.closest('.measurable') : null;
-      if(target){
-        currentTarget = target;
-        updateBadge(target, lastX, lastY);
-      } else if(currentTarget){
-        hideBadge();
-      }
-    });
-  }, { passive:true });
+function updateMenu() {
+  menuItems.forEach(m => {
+    const tIdx = parseInt(m.dataset.idx);
+    m.classList.toggle('active', sections[current].group === sections[tIdx].group);
+  });
+}
 
-  document.addEventListener('mouseleave', hideBadge);
-  window.addEventListener('scroll', ()=>{ if(currentTarget) updateBadge(currentTarget, lastX, lastY); }, { passive:true });
-  window.addEventListener('resize', ()=>{ if(currentTarget) updateBadge(currentTarget, lastX, lastY); });
+function renderFront() {
+  frontCard.className = `card ${sections[current].cls}`;
+  frontCard.innerHTML = cardHTML(current);
+}
+
+function goTo(idx) {
+  if (idx < 0 || idx >= sections.length || idx === current || isAnimating) return;
+  isAnimating = true;
+  const dir = idx > current ? 1 : -1;
+
+  // Hide peeks instantly
+  peek2.style.transition = 'opacity 0.15s';
+  peek3.style.transition = 'opacity 0.15s';
+  peek2.style.opacity = '0';
+  peek3.style.opacity = '0';
+
+  removeTilt();
+  frontSlot.style.transition = 'transform 0.3s cubic-bezier(0.4,0,0.6,1), opacity 0.25s';
+  frontSlot.style.transform = `translateX(${dir * -120}%) rotate(${dir * -8}deg)`;
+  frontSlot.style.opacity = '0';
+
+  current = idx;
+  updateLabels(); updateMenu();
+  menuDrawer.classList.remove('open');
+  menuBtn.classList.remove('menu-open');
+
+  setTimeout(() => {
+    renderFront();
+    frontSlot.style.transition = 'none';
+    frontSlot.style.transform = `translateX(${dir * 70}%) rotate(${dir * 5}deg)`;
+    frontSlot.style.opacity = '0';
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      frontSlot.style.transition = 'transform 0.42s cubic-bezier(0.34,1.08,0.64,1), opacity 0.28s';
+      frontSlot.style.transform = '';
+      frontSlot.style.opacity = '1';
+      setTimeout(() => {
+        addTilt();
+        isAnimating = false;
+        updatePeekColors();
+        peek2.style.transition = 'opacity 0.35s';
+        peek3.style.transition = 'opacity 0.35s';
+        peek2.style.opacity = '1';
+        peek3.style.opacity = '1';
+      }, 420);
+    }));
+  }, 260);
+}
+
+prevLabel.addEventListener('click', () => goTo(current - 1));
+nextLabel.addEventListener('click', () => goTo(current + 1));
+
+menuBtn.addEventListener('click', () => {
+  const open = menuDrawer.classList.toggle('open');
+  menuBtn.classList.toggle('menu-open', open);
+});
+
+menuItems.forEach(item => {
+  item.addEventListener('click', () => goTo(parseInt(item.dataset.idx)));
+});
+
+// ── HOVER — gentle float lift ──
+function addTilt() {
+  const card = frontCard;
+  card._enter = () => {
+    card.style.transition = 'transform 0.45s cubic-bezier(0.34,1.1,0.64,1)';
+    card.style.transform = 'translateY(-10px) scale(1.015)';
+  };
+  card._leave = () => {
+    card.style.transition = 'transform 0.4s cubic-bezier(0.4,0,0.2,1)';
+    card.style.transform = '';
+  };
+  card.addEventListener('mouseenter', card._enter);
+  card.addEventListener('mouseleave', card._leave);
+}
+
+function removeTilt() {
+  const card = frontCard;
+  if (card._enter) card.removeEventListener('mouseenter', card._enter);
+  if (card._leave) card.removeEventListener('mouseleave', card._leave);
+  card.style.transition = '';
+  card.style.transform = '';
+}
+
+// Init
+renderFront();
+updatePeekColors();
+updateLabels();
+addTilt();
 </script>
-
 </body>
 </html>
